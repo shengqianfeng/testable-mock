@@ -15,7 +15,7 @@ public class DemoInherit {
      */
     public Box putIntoBox() {
         Box box = new BlackBox("");
-        box.put("data");
+        box.put("jeff's cat");
         return box;
     }
 
@@ -24,7 +24,7 @@ public class DemoInherit {
      */
     public BlackBox putIntoBlackBox() {
         BlackBox box = new BlackBox("");
-        box.put("data");
+        box.put("jeff's black cat");
         return box;
     }
 
@@ -32,7 +32,7 @@ public class DemoInherit {
      * call method defined in parent class via parent class variable
      */
     public String getFromBox() {
-        Box box = new BlackBox("data");
+        Box box = new BlackBox("jeff's cat");
         return box.get();
     }
 

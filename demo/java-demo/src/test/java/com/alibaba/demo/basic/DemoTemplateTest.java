@@ -23,18 +23,22 @@ class DemoTemplateTest {
 
         @MockMethod
         private <T> List<T> getList(DemoTemplate self, T value) {
-            return new ArrayList<T>() {{ add((T)(value.toString() + "_mock_list")); }};
+            return new ArrayList<T>() {{
+                add((T) (value.toString() + "_mock_list"));
+            }};
         }
 
         @MockMethod
         private <K, V> Map<K, V> getMap(DemoTemplate self, K key, V value) {
-            return new HashMap<K, V>() {{ put(key, (V)(value.toString() + "_mock_map")); }};
+            return new HashMap<K, V>() {{
+                put(key, (V) (value.toString() + "_mock_map"));
+            }};
         }
 
         @MockConstructor
         private <T> HashSet<T> newHashSet() {
             HashSet<T> set = new HashSet<>();
-            set.add((T)"insert_mock");
+            set.add((T) "insert_mock");
             return set;
         }
 
@@ -71,6 +75,9 @@ class DemoTemplateTest {
         //}
     }
 
+    /**
+     * 对调用的方法内部的getList方法mock，改变输出结果(后缀加_mock_list)
+     */
     @Test
     void should_mock_single_template_method() {
         String res = demoTemplate.singleTemplateMethod();

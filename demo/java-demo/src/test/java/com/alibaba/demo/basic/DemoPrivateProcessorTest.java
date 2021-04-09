@@ -18,31 +18,50 @@ class DemoPrivateProcessorTest {
 
     private DemoPrivateAccess demoPrivateAccess = new DemoPrivateAccess();
 
+    /**
+     * 访问私有方法
+     */
     @Test
     void should_access_private_method() {
-        List<String> list = new ArrayList<String>() {{ add("a"); add("b"); add("c"); }};
+        List<String> list = new ArrayList<String>() {{
+            add("a");
+            add("b");
+            add("c");
+        }};
         assertEquals("member", demoPrivateAccess.privateFunc());
         assertEquals("abc + hello + 1", demoPrivateAccess.privateFuncWithArgs(list, "hello", 1));
     }
 
+    /**
+     * 访问私有属性
+     */
     @Test
     void should_access_private_field() {
         demoPrivateAccess.count = 2;
         assertEquals(Integer.valueOf(2), demoPrivateAccess.count);
     }
 
+    /**
+     * 访问静态私有方法
+     */
     @Test
     void should_access_private_static_method() {
         assertEquals("static", DemoPrivateAccess.privateStaticFunc());
         assertEquals("hello + 1", DemoPrivateAccess.privateStaticFuncWithArgs("hello", 1));
     }
 
+    /**
+     * 访问静态私有属性
+     */
     @Test
     void should_access_private_static_field() {
         DemoPrivateAccess.staticCount = 2;
         assertEquals(Integer.valueOf(2), DemoPrivateAccess.staticCount);
     }
 
+    /**
+     * 更新final属性
+     */
     @Test
     void should_update_final_field() {
         demoPrivateAccess.pi = 4.13;

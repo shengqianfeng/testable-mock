@@ -16,7 +16,7 @@ public class DemoMock {
      * method with new operation
      */
     public String newFunc() {
-        BlackBox component = new BlackBox("something");
+        BlackBox component = new BlackBox("jeff's Box");
         return component.get();
     }
 

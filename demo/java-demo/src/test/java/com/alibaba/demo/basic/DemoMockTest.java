@@ -73,8 +73,8 @@ class DemoMockTest {
 
     @Test
     void should_mock_new_object() {
-        assertEquals("mock_something", demoMock.newFunc());
-        verify("createBlackBox").with("something");
+        assertEquals("mock_jeff's Box", demoMock.newFunc());
+        verify("createBlackBox").with("jeff's Box");
     }
 
     @Test
@@ -104,7 +104,7 @@ class DemoMockTest {
         assertEquals("mock_one_mock_others", demoMock.callerOne() + "_" + demoMock.callerTwo());
         // asynchronous
         assertEquals("mock_one_mock_others",
-            Executors.newSingleThreadExecutor().submit(() -> demoMock.callerOne() + "_" + demoMock.callerTwo()).get());
+                Executors.newSingleThreadExecutor().submit(() -> demoMock.callerOne() + "_" + demoMock.callerTwo()).get());
         verify("callFromDifferentMethod").withTimes(4);
     }
 

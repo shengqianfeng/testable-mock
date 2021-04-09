@@ -37,6 +37,7 @@ class DemoOmniMethodsTest {
         Parent parent = OmniConstructor.newInstance(Parent.class);
         parent.setChildren(OmniConstructor.newArray(Child.class, 3));
         parent.getChild().getGrandChild().setContent("from child");
+        //给孩子们的孩子都设置Content
         parent.getChildren()[0].getGrandChild().setContent("from 1st children");
         parent.getChildren()[1].getGrandChild().setContent("from 2nd children");
         parent.getChildren()[2].getGrandChild().setContent("from 3rd children");

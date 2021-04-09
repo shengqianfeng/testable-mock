@@ -19,15 +19,21 @@ class DemoMatcherTest {
 
     public static class Mock {
         @MockMethod(targetMethod = "methodToBeMocked")
-        private void methodWithoutArgument(DemoMatcher self) {}
+        private void methodWithoutArgument(DemoMatcher self) {
+        }
 
         @MockMethod(targetMethod = "methodToBeMocked")
-        private void methodWithArguments(DemoMatcher self, Object a1, Object a2) {}
+        private void methodWithArguments(DemoMatcher self, Object a1, Object a2) {
+        }
 
         @MockMethod(targetMethod = "methodToBeMocked")
-        private void methodWithArrayArgument(DemoMatcher self, Object[] a) {}
+        private void methodWithArrayArgument(DemoMatcher self, Object[] a) {
+        }
     }
 
+    /**
+     * 校验目标Mock被执行的次数
+     */
     @Test
     void should_match_no_argument() {
         demoMatcher.callMethodWithoutArgument();
@@ -36,12 +42,19 @@ class DemoMatcherTest {
         verify("methodWithoutArgument").withTimes(2);
     }
 
+    /**
+     * with(Object... args) → 验证方法是否被指定参数调用过
+     * without(Object... args) → 验证方法从未被使用指定参数调用过
+     * withInOrder(Object... args) → 如果指定方法被调用了多次，依据实际调用顺序依次匹配
+     */
     @Test
     void should_match_number_arguments() {
         demoMatcher.callMethodWithNumberArguments();
+        //从未被(String,2)入参调用过
         verify("methodWithArguments").without(anyString(), 2);
         verify("methodWithArguments").withInOrder(anyInt(), 2);
         verify("methodWithArguments").withInOrder(anyLong(), anyNumber());
+        //验证被入参<1.0,Map<String,Float>>调用过
         verify("methodWithArguments").with(1.0, anyMapOf(Integer.class, Float.class));
         verify("methodWithArguments").with(anyList(), anySetOf(Float.class));
         verify("methodWithArguments").with(anyList(), anyListOf(Float.class));

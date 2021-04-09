@@ -19,7 +19,11 @@ class DemoPrivateAccessorTest {
 
     @Test
     void should_access_private_method() {
-        List<String> list = new ArrayList<String>() {{ add("a"); add("b"); add("c"); }};
+        List<String> list = new ArrayList<String>() {{
+            add("a");
+            add("b");
+            add("c");
+        }};
         assertEquals("member", PrivateAccessor.invoke(demoPrivateAccess, "privateFunc"));
         assertEquals("abc + hello + 1", PrivateAccessor.invoke(demoPrivateAccess, "privateFuncWithArgs", list, "hello", 1));
     }
@@ -30,18 +34,27 @@ class DemoPrivateAccessorTest {
         assertEquals(Integer.valueOf(3), PrivateAccessor.get(demoPrivateAccess, "count"));
     }
 
+    /**
+     * 访问私有的(带参数的)静态方法
+     */
     @Test
     void should_access_private_static_method() {
         assertEquals("static", PrivateAccessor.invokeStatic(DemoPrivateAccess.class, "privateStaticFunc"));
         assertEquals("hello + 1", PrivateAccessor.invokeStatic(DemoPrivateAccess.class, "privateStaticFuncWithArgs", "hello", 1));
     }
 
+    /**
+     * 给静态的私有属性赋值
+     */
     @Test
     void should_access_private_static_field() {
         PrivateAccessor.setStatic(DemoPrivateAccess.class, "staticCount", 3);
         assertEquals(Integer.valueOf(3), PrivateAccessor.getStatic(DemoPrivateAccess.class, "staticCount"));
     }
 
+    /**
+     * 给final类型的变量赋值
+     */
     @Test
     void should_update_final_field() {
         PrivateAccessor.set(demoPrivateAccess, "pi", 3.14);

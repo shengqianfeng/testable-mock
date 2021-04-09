@@ -45,24 +45,33 @@ class DemoInheritTest {
 
         @MockMethod(targetMethod = "getColor")
         private String get_color_from_blackbox(BlackBox self) {
-        return "color_from_blackbox";
-    }
+            return "color_from_blackbox";
+        }
     }
 
+    /**
+     * 对Box对象的put方法做mock
+     */
     @Test
     void should_mock_call_sub_object_method_by_parent_object() {
-        BlackBox box = (BlackBox)demoInherit.putIntoBox();
+        BlackBox box = (BlackBox) demoInherit.putIntoBox();
         verify("put_into_box").withTimes(1);
-        assertEquals("put_data_into_box", box.get());
+        assertEquals("put_jeff's cat_into_box", box.get());
     }
 
+    /**
+     * 对BlackBox的put方法做mock，BlackBox是Box的子类
+     */
     @Test
     void should_mock_call_sub_object_method_by_sub_object() {
         BlackBox box = demoInherit.putIntoBlackBox();
         verify("put_into_blackbox").withTimes(1);
-        assertEquals("put_data_into_blackbox", box.get());
+        assertEquals("put_jeff's black cat_into_blackbox", box.get());
     }
 
+    /**
+     * 对Box对象 get方法做mock，返回字符串:get_from_box
+     */
     @Test
     void should_mock_call_parent_object_method_by_parent_object() {
         String content = demoInherit.getFromBox();
@@ -70,6 +79,9 @@ class DemoInheritTest {
         assertEquals("get_from_box", content);
     }
 
+    /**
+     * 对BlackBox的get方法做mock，直接返回字符串：get_from_blackbox
+     */
     @Test
     void should_mock_call_parent_object_method_by_sub_object() {
         String content = demoInherit.getFromBlackBox();
@@ -77,6 +89,9 @@ class DemoInheritTest {
         assertEquals("get_from_blackbox", content);
     }
 
+    /**
+     * 对Color#getColor做mock，返回字符串：color_from_color
+     */
     @Test
     void should_mock_call_interface_method_by_interface_object() {
         String color = demoInherit.getColorViaColor();
@@ -84,6 +99,9 @@ class DemoInheritTest {
         assertEquals("color_from_color", color);
     }
 
+    /**
+     * 对BlackBox#getColor做mock，返回字符串：color_from_blackbox
+     */
     @Test
     void should_mock_call_interface_method_by_sub_class_object() {
         String color = demoInherit.getColorViaBox();
